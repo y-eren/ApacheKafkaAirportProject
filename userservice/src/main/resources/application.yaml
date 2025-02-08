@@ -13,7 +13,7 @@ spring:
     host: smtp.gmail.com
     port: 25
     username: ""
-    password: "cebf tpjr uzsy cqaa"
+    password: ""
     protocol: smtp
     properties:
       mail:
