@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+<h:head>
+    <title>Havalimanı Güncelle</title>
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css"/>
+</h:head>
+<h:body>
+    <h:form id="airportForm">
+        <h1>Havalimanı Güncelle</h1>
+
+        <p:dataTable value="#{userBean.airports}" var="airport"
+                     selection="#{userBean.selectedAirport}"
+                     selectionMode="single" rowKey="#{airport.id}" id="airportTable">
+            <p:column headerText="ID">
+                <h:outputText value="#{airport.id}" />
+            </p:column>
+            <p:column headerText="Ad">
+                <h:outputText value="#{airport.name}" />
+            </p:column>
+            <p:column headerText="Şehir">
+                <h:outputText value="#{airport.city}" />
+            </p:column>
+            <p:column headerText="Ülke">
+                <h:outputText value="#{airport.country}" />
+            </p:column>
+            <p:column headerText="Kod">
+                <h:outputText value="#{airport.code}" />
+            </p:column>
+        </p:dataTable>
+
+
+        <p:commandButton value="Düzenle" process="airportTable" update=":updateDialog" oncomplete="PF('updateDialog').show();" />
+
+
+
+    </h:form>
+
+
+    <p:dialog id="updateDialog" header="Havalimanı Güncelle" widgetVar="updateDialog" modal="true" closable="true">
+        <h:form id="updateForm">
+            <p:messages id="messages" autoUpdate="true" closable="true" />
+            <p:panelGrid columns="2" styleClass="p-fluid">
+                <p:outputLabel value="Ad:" for="name" />
+                <p:inputText id="name" value="#{userBean.selectedAirport.name}" />
+
+                <p:outputLabel value="Şehir:" for="city" />
+                <p:inputText id="city" value="#{userBean.selectedAirport.city}" />
+
+                <p:outputLabel value="Ülke:" for="country" />
+                <p:inputText id="country" value="#{userBean.selectedAirport.country}" />
+
+                <p:outputLabel value="Kod:" for="code" />
+                <p:inputText id="code" value="#{userBean.selectedAirport.code}" />
+            </p:panelGrid>
+
+            <p:commandButton value="Kaydet" action="#{userBean.updateAirport}" update="airportForm,messages"
+                             oncomplete="PF('updateDialog').hide();" />
+        </h:form>
+    </p:dialog>
+</h:body>
+</html>

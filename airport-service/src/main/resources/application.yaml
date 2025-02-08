@@ -1,0 +1,42 @@
+  spring:
+    datasource:
+      url: jdbc:postgresql://localhost:5435/airportdb
+      username: postgres
+      password: admin
+    jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+    kafka:
+      bootstrap-servers: localhost:9092
+    mail:
+      host: smtp.gmail.com
+      port: 25
+      username: ""
+      password: "cebf tpjr uzsy cqaa"
+      protocol : smtp
+      properties:
+        mail:
+          smtp:
+            auth: true
+            starttls:
+              enable: true
+  joinfaces:
+    faces:
+      project-stage: development
+      state-saving-method: server
+      validate-empty-fields: true
+      facelets-refresh-period: 1
+
+    faces-servlet:
+      name: FacesServlet
+      url-mappings:
+        - "*.jsf"
+        - "*.xhtml"
+    primefaces:
+      theme: vela
+  server:
+    port: 8080
+
+
+

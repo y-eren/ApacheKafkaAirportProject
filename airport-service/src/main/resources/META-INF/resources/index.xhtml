@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:faces="jakarta.faces"
+      xmlns:ui="jakarta.faces.facelets"
+      xmlns:f="jakarta.faces.core"
+      xmlns:h="jakarta.faces.html"
+      xmlns:pt="jakarta.faces.passthrough"
+      xmlns:cc="jakarta.faces.composite"
+      xmlns:c="jakarta.tags.core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="jakarta.tags.functions">
+
+
+<h:head>
+    <title>Havaalanı Yönetimi</title>
+    <h:outputStylesheet library="webjars" name="primeflex/3.3.1/primeflex.min.css" />
+    <h:outputStylesheet library="assets" name="css/layout.css" />
+</h:head>
+
+<script>
+    const socket = new WebSocket("ws://localhost:8080/ws/airport-updates");
+
+    socket.onopen = () => {
+        console.log("Socket acildi");
+    }
+
+    socket.onmessage = (event) => {
+        const updateDiv = document.getElementById("live-updates");
+        const newMessage = document.createElement("div");
+
+    console.log("Gönderilen mesaj" + event.data);
+        newMessage.textContent = event.data;
+        updateDiv.appendChild(newMessage);
+    }
+
+    socket.onclose = () => {
+        console.log("Socket kapatildi");
+    }
+</script>
+
+<h:body>
+    <h1 class="justify-content-center">Havaalanı Yönetimi</h1>
+
+
+    <h2>Canlı güncellemeler</h2>
+
+    <div id="live-updates">
+
+
+    </div>
+
+
+</h:body>
+
+</html>
